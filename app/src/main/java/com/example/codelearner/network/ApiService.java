@@ -6,10 +6,12 @@ import retrofit2.http.*;
 
 import java.util.List;
 import java.util.Map;
+
 import com.example.codelearner.Models.LearningPath;
 import com.example.codelearner.Models.Feedback;
 import com.example.codelearner.Models.LearningPlan;
 import com.example.codelearner.Models.LearningPlanRequest;
+import com.example.codelearner.Models.Student;
 
 public interface ApiService {
 
@@ -31,13 +33,9 @@ public interface ApiService {
     @POST("plans/generate")
     Call<LearningPlan> generatePlan(@Body LearningPlanRequest request);
 
-
-
     @GET("/ping")
     Call<ResponseBody> pingBackend();
 
-
-
-
-
+    @GET("students/{studentId}")
+    Call<Student> getStudentById(@Path("studentId") String studentId);
 }

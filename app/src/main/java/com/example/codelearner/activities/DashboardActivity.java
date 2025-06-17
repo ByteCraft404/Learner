@@ -41,6 +41,12 @@ public class DashboardActivity extends AppCompatActivity {
 
         String studentId = getIntent().getStringExtra("studentId");
 
+        // ✅ Null check for studentId to prevent crash
+        if (studentId == null || studentId.isEmpty()) {
+            Toast.makeText(this, "Student ID is missing!", Toast.LENGTH_LONG).show();
+            return; // Exit to prevent null usage
+        }
+
         ApiService api = ApiClient.getClient().create(ApiService.class);
         api.generateLearningPath(Map.of("studentId", studentId)).enqueue(new Callback<LearningPath>() {
             @Override
@@ -79,7 +85,6 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-
         LearningPlanRequest request = new LearningPlanRequest("Software Engineer", Arrays.asList("A", "B"), 10, "video");
 
         Call<LearningPlan> call = apiService.generatePlan(request);
@@ -88,7 +93,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onResponse(Call<LearningPlan> call, Response<LearningPlan> response) {
                 if (response.isSuccessful()) {
                     LearningPlan plan = response.body();
-                    // update UI
+                    // update UI if needed
                 }
             }
 
@@ -97,7 +102,5 @@ public class DashboardActivity extends AppCompatActivity {
                 Toast.makeText(DashboardActivity.this, "Failed to connect: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 }

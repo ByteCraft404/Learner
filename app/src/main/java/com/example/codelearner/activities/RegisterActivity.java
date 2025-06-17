@@ -111,26 +111,48 @@ public class RegisterActivity extends AppCompatActivity {
 
         Call<Student> call = api.registerUser(student);
         call.enqueue(new Callback<Student>() {
+
             @Override
             public void onResponse(Call<Student> call, Response<Student> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this, SigninActivity.class));
-                    finish(); // Finish current activity after successful registration
+                    Toast.makeText(RegisterActivity.this, "Registration successful. Redirecting to login...", Toast.LENGTH_SHORT).show();
+
+                    new android.os.Handler().postDelayed(() -> {
+                        Intent intent = new Intent(RegisterActivity.this, SigninActivity.class);
+                        intent.putExtra("email", student.getEmail()); // Optional: prefill email
+                        startActivity(intent);
+                        finish();
+                    }, 2000);
+
                 } else {
                     String errorMessage = "Registration failed. Please try again.";
+
                     if (response.code() == 409) {
-                        errorMessage = "Email already registered.";
-                    } else if (response.errorBody() != null) {
+
+                        Toast.makeText(RegisterActivity.this, "Email already registered. Redirecting to login...", Toast.LENGTH_SHORT).show();
+                        new android.os.Handler().postDelayed(() -> {
+                            Intent intent = new Intent(RegisterActivity.this, SigninActivity.class);
+                            intent.putExtra("email", student.getEmail()); // Optional: prefill email
+                            startActivity(intent);
+                            finish();
+                        }, 2000);
+                        return;
+                    }
+
+                    // Read error body if available
+                    if (response.errorBody() != null) {
                         try {
                             errorMessage = response.errorBody().string();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+
                     Toast.makeText(RegisterActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                 }
             }
+
+
 
             @Override
             public void onFailure(Call<Student> call, Throwable t) {

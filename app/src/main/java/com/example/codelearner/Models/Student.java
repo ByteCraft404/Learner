@@ -1,52 +1,43 @@
 package com.example.codelearner.Models;
 
 public class Student {
-    private Long id;
-    private String name;
+    private String id;
     private String email;
-    private String password;
+    private String fullName;
 
-    // No-argument constructor (required for Retrofit/Gson)
+    // No-argument constructor
     public Student() {}
 
-    // All-arguments constructor
-    public Student(String name, String email, String password) {
-        this.name = name;
+    // Constructor with all fields
+    public Student(String id, String email, String fullName) {
+        this.id = id;
         this.email = email;
-        this.password = password;
+        this.fullName = fullName;
     }
 
     // Getters
-    public Long getId() {
+    public String getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFullName() {
+        return fullName;
     }
 
     // Setters
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }
