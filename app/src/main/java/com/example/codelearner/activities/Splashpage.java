@@ -1,13 +1,17 @@
 package com.example.codelearner.activities; // Ensure this package matches your project structure
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 // Import View for findViewById and OnClickListener
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView; // Import CardView
+import androidx.core.content.ContextCompat;
 
 import com.example.codelearner.R;
 
@@ -20,18 +24,21 @@ public class Splashpage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_splashpage);
 
-        // Set the status bar color to your desired color
-        // For API 21+ (Lollipop and above)
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.start));
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.start));
+        // Set white status bar and navigation bar with dark icons
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.start));
+            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.start));
         }
 
-        setContentView(R.layout.activity_splashpage);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            View decor = getWindow().getDecorView();
+            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+        }
         exploreButtonCard = findViewById(R.id.explore_button_card);
 
         // Set an OnClickListener for the "EXPLORE" CardView

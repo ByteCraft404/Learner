@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -13,9 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.SharedPreferences; // Import SharedPreferences
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import com.example.codelearner.Models.LoginRequest;
 import com.example.codelearner.Models.LoginResponse;
@@ -40,18 +43,21 @@ public class SigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_signin);
 
-        // Set the status bar color to your desired color
-        // For API 21+ (Lollipop and above)
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.start));
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.start));
+        // Set white status bar and navigation bar with dark icons
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.start));
+            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.start));
         }
 
-        setContentView(R.layout.activity_signin);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            View decor = getWindow().getDecorView();
+            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+        }
 
         // Initialize views
         etEmail = findViewById(R.id.edit_text_email);
@@ -94,16 +100,19 @@ public class SigninActivity extends AppCompatActivity {
                             studentName = loginResponse.getEmail();
                         }
 
-
-                        getSharedPreferences("user_prefs", MODE_PRIVATE)
-                                .edit()
-                                .putString("studentName", studentName)
-                                .apply();
+                        // --- FIX START: Store studentId and studentEmail in SharedPreferences ---
+                        SharedPreferences sharedPref = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("studentName", studentName);
+                        editor.putString("studentId", loginResponse.getId()); // Store the student ID
+                        editor.putString("studentEmail", loginResponse.getEmail()); // Store the student email
+                        editor.apply();
+                        // --- FIX END ---
 
                         Toast.makeText(SigninActivity.this, "Welcome " + studentName, Toast.LENGTH_SHORT).show();
 
+                        // Removed putExtra("studentId", ...) as it's now in SharedPreferences
                         Intent intent = new Intent(SigninActivity.this, MainActivity.class);
-                        intent.putExtra("studentId", loginResponse.getId());
                         startActivity(intent);
                         finish();
                     }

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
@@ -9,18 +10,27 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp">
 
-    <!-- User avatar -->
-    <ImageView
-        android:id="@+id/userAvatar"
+    <!-- User avatar wrapped in CardView -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/userAvatarCard"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_black_button_outline"
-        android:contentDescription="User Avatar"
-        android:scaleType="centerCrop"
-        android:src="@drawable/students"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/userAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="User Avatar"
+            android:scaleType="centerCrop"
+            android:src="@drawable/students" />
+    </androidx.cardview.widget.CardView>
 
     <!-- User message + copy -->
     <LinearLayout
@@ -32,8 +42,8 @@
         android:background="@drawable/purple_gradient_rounded_bubble"
         android:orientation="vertical"
         android:padding="12dp"
-        app:layout_constraintStart_toEndOf="@id/userAvatar"
-        app:layout_constraintTop_toTopOf="@id/userAvatar"
+        app:layout_constraintStart_toEndOf="@id/userAvatarCard"
+        app:layout_constraintTop_toTopOf="@id/userAvatarCard"
         app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Message text -->

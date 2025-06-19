@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.codelearner.R;
 
-public class learninghub extends AppCompatActivity {
+public class one extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

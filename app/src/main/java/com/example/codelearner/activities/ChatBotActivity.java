@@ -1,18 +1,25 @@
 package com.example.codelearner.activities;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.codelearner.R;
-import com.example.codelearner.api.GeminiApiService;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.example.codelearner.Models.ChatRequest;
 import com.example.codelearner.Models.ChatResponse;
+import com.example.codelearner.R;
+import com.example.codelearner.api.GeminiApiService;
 import com.example.codelearner.network.ApiClient;
 
 import retrofit2.Call;
@@ -21,48 +28,48 @@ import retrofit2.Response;
 
 public class ChatBotActivity extends AppCompatActivity {
     private EditText messageInput;
-    private ImageView sendIcon;
+    private ImageView sendIcon, plusIcon;
     private LinearLayout chatMessagesContainer;
     private ScrollView chatScrollView;
     private GeminiApiService geminiApi;
     private String studentName;
-    private ImageView backButton;
-
+    private static final int PICK_IMAGE_REQUEST = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
-        }
-
-
         setContentView(R.layout.activity_chat_bot);
 
+        // Styling the system UI
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
+            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.black));
+        }
 
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            View decor = getWindow().getDecorView();
+            decor.setSystemUiVisibility(0);
+        }
 
         studentName = getSharedPreferences("user_prefs", MODE_PRIVATE)
                 .getString("studentName", "Student");
 
         messageInput = findViewById(R.id.messageInput);
         sendIcon = findViewById(R.id.sendIcon);
+        plusIcon = findViewById(R.id.plusIcon);
         chatMessagesContainer = findViewById(R.id.chatMessagesContainer);
         chatScrollView = findViewById(R.id.chatScrollView);
+
         ImageView backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
-
 
         geminiApi = ApiClient.getClient().create(GeminiApiService.class);
 
         showAIMessage("Hello " + studentName + ", I'm Tiffany. How can I assist you today?");
 
+        // Send Message Click
         sendIcon.setOnClickListener(v -> {
             String question = messageInput.getText().toString().trim();
             if (question.isEmpty()) {
@@ -90,6 +97,33 @@ public class ChatBotActivity extends AppCompatActivity {
                 }
             });
         });
+
+        // Image Attachment Click
+        plusIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, PICK_IMAGE_REQUEST);
+        });
+    }
+
+    // Handle Gallery Image Selection
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri imageUri = data.getData();
+            showSelectedImage(imageUri);
+        }
+    }
+
+    private void showSelectedImage(Uri imageUri) {
+        View view = getLayoutInflater().inflate(R.layout.item_user_image_message, chatMessagesContainer, false);
+        ImageView userImage = view.findViewById(R.id.userImageView);
+        userImage.setImageURI(imageUri);
+
+        chatMessagesContainer.addView(view);
+        scrollToBottom();
     }
 
     private void inflateUserMessage(String messageText) {
@@ -100,8 +134,8 @@ public class ChatBotActivity extends AppCompatActivity {
         messageTextView.setText(messageText);
 
         btnCopy.setOnClickListener(v -> {
-            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("User Message", messageText);
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("User Message", messageText);
             clipboard.setPrimaryClip(clip);
             Toast.makeText(this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
         });
@@ -109,7 +143,6 @@ public class ChatBotActivity extends AppCompatActivity {
         chatMessagesContainer.addView(view);
         scrollToBottom();
     }
-
 
     private void showAIMessage(String responseText) {
         View view = getLayoutInflater().inflate(R.layout.item_ai_message, chatMessagesContainer, false);
@@ -123,19 +156,16 @@ public class ChatBotActivity extends AppCompatActivity {
         chatMessagesContainer.addView(view);
         scrollToBottom();
 
-        // --- Animate the text like typing ---
         animateTyping(aiResponseText, responseText);
 
-        // --- COPY Button ---
         btnCopy.setOnClickListener(v -> {
             String textToCopy = aiResponseText.getText().toString();
-            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("AI Response", textToCopy);
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("AI Response", textToCopy);
             clipboard.setPrimaryClip(clip);
             Toast.makeText(this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
         });
 
-        // --- REFRESH Button ---
         btnRefresh.setOnClickListener(v -> {
             String question = messageInput.getText().toString().trim();
             if (question.isEmpty()) {
@@ -160,11 +190,9 @@ public class ChatBotActivity extends AppCompatActivity {
             });
         });
 
-        btnLike.setOnClickListener(v -> Toast.makeText(this, "Thank you For Your Feedback", Toast.LENGTH_SHORT).show());
+        btnLike.setOnClickListener(v -> Toast.makeText(this, "Thank you for your feedback", Toast.LENGTH_SHORT).show());
         btnVolume.setOnClickListener(v -> Toast.makeText(this, "Volume button (feature coming soon)", Toast.LENGTH_SHORT).show());
     }
-
-
 
     private void scrollToBottom() {
         chatScrollView.post(() -> chatScrollView.fullScroll(View.FOCUS_DOWN));
@@ -172,11 +200,11 @@ public class ChatBotActivity extends AppCompatActivity {
 
     private void animateTyping(TextView textView, String message) {
         final int[] index = {0};
-        final int delay = 30; // milliseconds between characters
+        final int delay = 30;
 
         textView.setText("");
 
-        new android.os.Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (index[0] < message.length()) {
@@ -188,6 +216,4 @@ public class ChatBotActivity extends AppCompatActivity {
             }
         }, delay);
     }
-
-
 }

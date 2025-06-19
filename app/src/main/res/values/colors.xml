@@ -5,5 +5,36 @@
     <color name="bottom_nav_selected_indicator_color">#4285F4</color> <color name="bottom_nav_selected_text_icon_color">@android:color/white</color> <color name="bottom_nav_unselected_text_icon_color">#808080</color>
     <color name="blue_atende">#1976D2</color>
     <color name="bottom_nav_ripple_color_effect">#BBDEFB</color>
+    <color name="light_grey_background">#F5F5F5</color> <color name="card_orange">#FF7043</color>
+    <color name="card_purple">#7E57C2</color>
+    <color name="card_light_purple">#EDE7F6</color>
+    <color name="card_light_orange">#FBE9E7</color>
+    <color name="card_light_teal">#E0F2F1</color>
+
+    <color name="text_dark_grey">#424242</color>
+    <color name="text_medium_grey">#757575</color>
+    <color name="text_white">#FFFFFF</color>
+
+    <color name="topic_card_color_1">#FBE9E7</color> <!-- Light Orange/Red -->
+    <color name="topic_card_color_2">#E8F5E9</color> <!-- Light Green -->
+    <color name="topic_card_color_3">#E0F2F7</color> <!-- Light Blue -->
+    <color name="topic_card_color_4">#EDE7F6</color> <!-- Light Purple -->
+    <color name="topic_card_color_5">#FFFDE7</color> <!-- Light Yellow -->
+
+
+    <!-- Status Tag Colors (updated for student theme) -->
+    <color name="tag_due_soon_orange">#FFB74D</color>   <!-- Changed from running_orange -->
+    <color name="tag_overdue_red">#EF5350</color>       <!-- Changed from running_red -->
+    <color name="tag_in_progress_green">#66BB6A</color> <!-- Changed from running_green -->
+
+    <color name="orange_main_topic">#FF9800</color>
+    <color name="purple_main_topic">#673AB7</color>
+    <color name="light_green_completed">#E8F5E9</color> <!-- For completed topics -->
+
+
+
+    <color name="tag_running_red">#EF5350</color>
+    <color name="tag_running_orange">#FFB74D</color>
+    <color name="tag_running_green">#66BB6A</color>
 
 </resources>
