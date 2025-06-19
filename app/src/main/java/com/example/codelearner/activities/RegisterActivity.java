@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.graphics.Color; // Import Color class
+import android.graphics.Color;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,32 +28,22 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etFullName, etEmail, etPassword, etConfirmPassword;
     Button btnRegister;
     ImageView togglePasswordVisibility, toggleConfirmPasswordVisibility;
-    TextView signInLinkBottom; // Declare the TextView for the "Sign In" link
+    TextView signInLinkBottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // --- START: Status Bar and Navigation Bar customization ---
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-            // Set Status Bar color to white
-            window.setStatusBarColor(Color.WHITE);
 
-            // Set Navigation Bar color to white (optional, as it's often black by default)
-            window.setNavigationBarColor(Color.WHITE);
-
-            // Make status bar icons dark for better visibility on a light background
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                window.getDecorView().setSystemUiVisibility(
-                        window.getDecorView().getSystemUiVisibility() |
-                                android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR |
-                                android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-            }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.start));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.start));
         }
-        // --- END: Status Bar and Navigation Bar customization ---
+
 
         setContentView(R.layout.activity_register);
 
@@ -62,15 +52,9 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.edit_text_password);
         etConfirmPassword = findViewById(R.id.edit_text_confirm_password);
         btnRegister = findViewById(R.id.login_button);
-
         togglePasswordVisibility = findViewById(R.id.toggle_password_visibility);
         toggleConfirmPasswordVisibility = findViewById(R.id.toggle_confirm_password_visibility);
-
-        // Initialize the "Sign In" link TextView
-        // IMPORTANT: Ensure R.id.sign_up_link_bottom is the correct ID for your "Sign In" TextView in activity_register.xml
-        // If it's intended to be "Sign In" in this activity, its ID should probably be something like sign_in_link_bottom.
-        // Double-check your activity_register.xml to confirm the ID for the "Sign In" link.
-        signInLinkBottom = findViewById(R.id.sign_up_link_bottom); // Assuming this is the correct ID for the Sign In link
+        signInLinkBottom = findViewById(R.id.sign_up_link_bottom); // Confirm this ID in XML
 
         btnRegister.setOnClickListener(v -> {
             String name = etFullName.getText().toString().trim();
@@ -88,7 +72,12 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            Student student = new Student(name, email, password);
+            // Create and populate Student object correctly
+            Student student = new Student();
+            student.setFullName(name);
+            student.setEmail(email);
+            student.setPassword(password);
+
             registerUser(student);
         });
 
@@ -97,12 +86,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         findViewById(R.id.back_button_container).setOnClickListener(v -> finish());
 
-        // Set OnClickListener for the "Sign In" link at the bottom
         signInLinkBottom.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterActivity.this, SigninActivity.class);
             startActivity(intent);
-            // Optional: finish() this activity if you don't want it on the back stack after navigating to Signin
-            // finish();
         });
     }
 
@@ -111,7 +97,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         Call<Student> call = api.registerUser(student);
         call.enqueue(new Callback<Student>() {
-
             @Override
             public void onResponse(Call<Student> call, Response<Student> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -119,27 +104,24 @@ public class RegisterActivity extends AppCompatActivity {
 
                     new android.os.Handler().postDelayed(() -> {
                         Intent intent = new Intent(RegisterActivity.this, SigninActivity.class);
-                        intent.putExtra("email", student.getEmail()); // Optional: prefill email
+                        intent.putExtra("email", student.getEmail());
                         startActivity(intent);
                         finish();
                     }, 2000);
-
                 } else {
                     String errorMessage = "Registration failed. Please try again.";
 
                     if (response.code() == 409) {
-
                         Toast.makeText(RegisterActivity.this, "Email already registered. Redirecting to login...", Toast.LENGTH_SHORT).show();
                         new android.os.Handler().postDelayed(() -> {
                             Intent intent = new Intent(RegisterActivity.this, SigninActivity.class);
-                            intent.putExtra("email", student.getEmail()); // Optional: prefill email
+                            intent.putExtra("email", student.getEmail());
                             startActivity(intent);
                             finish();
                         }, 2000);
                         return;
                     }
 
-                    // Read error body if available
                     if (response.errorBody() != null) {
                         try {
                             errorMessage = response.errorBody().string();
@@ -152,8 +134,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
 
-
-
             @Override
             public void onFailure(Call<Student> call, Throwable t) {
                 Toast.makeText(RegisterActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
@@ -165,10 +145,10 @@ public class RegisterActivity extends AppCompatActivity {
     private void togglePasswordVisibility(EditText editText, ImageView toggleIcon) {
         if (editText.getTransformationMethod() == null) {
             editText.setTransformationMethod(new android.text.method.PasswordTransformationMethod());
-            toggleIcon.setImageResource(R.drawable.ic_eye); // Assuming ic_eye is the "visible" icon
+            toggleIcon.setImageResource(R.drawable.ic_eye); // visible icon
         } else {
             editText.setTransformationMethod(null);
-            toggleIcon.setImageResource(R.drawable.ic_eye_off); // Assuming ic_eye_off is the "hidden" icon
+            toggleIcon.setImageResource(R.drawable.ic_eye_off); // hidden icon
         }
         editText.setSelection(editText.getText().length());
     }

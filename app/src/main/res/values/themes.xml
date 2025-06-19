@@ -1,9 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Base.Theme.CodeLearner" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
+
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/bottom_nav_ripple_color_effect</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
     </style>
 
     <style name="Theme.CodeLearner" parent="Base.Theme.CodeLearner" />
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/bottom_nav_selected_indicator_color</item>
+        <item name="colorOnPrimary">@color/bottom_nav_selected_text_icon_color</item>
+    </style>
+
+    <style name="BottomNavActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/bottom_nav_selected_indicator_color</item>
+        <item name="android:width">300dp</item>
+        <item name="android:height">600dp</item> <item name="marginHorizontal">-16dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.BottomNavActiveIndicator</item>
+        <item name="android:alpha">1</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.BottomNavActiveIndicator" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item> </style>
+
 </resources>

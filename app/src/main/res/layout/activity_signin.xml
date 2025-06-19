@@ -9,18 +9,7 @@
     android:background="#E8F5E9"
     tools:context=".activities.SigninActivity">
 
-    <ImageView
-        android:id="@+id/top_background_leaves"
-        android:layout_width="408dp"
-        android:layout_height="274dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/your_top"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_wave_start_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/back_button_container"
@@ -48,27 +37,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <ImageView
         android:id="@+id/wave_shape"
-        android:layout_width="409dp"
-        android:layout_height="137dp"
+        android:layout_width="412dp"
+        android:layout_height="82dp"
+        android:layout_marginBottom="32dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_wave_top"
         app:layout_constraintBottom_toTopOf="@+id/guideline_login_card_top"
-        app:layout_constraintDimensionRatio="H,10:3"
+        app:layout_constraintDimensionRatio="H,0:0"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline_wave_start_top"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_login_card_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.38" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/login_card"
@@ -174,7 +165,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_lock"
+                    android:src="@drawable/lock"
                     app:layout_constraintStart_toStartOf="@+id/edit_text_password"
                     app:layout_constraintTop_toTopOf="@+id/edit_text_password"
                     app:layout_constraintBottom_toBottomOf="@+id/edit_text_password"

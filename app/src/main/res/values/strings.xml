@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CodeLearner</string>
+    <string name="app_name">SomaWay</string>
     <string name="back_button_desc">\n</string>
     <string name="leaf_icon_desc">\n</string>
     <string name="lock_icon_desc">\n</string>
@@ -10,4 +10,5 @@
     <string name="facebook_login_desc" />
     <string name="checkmark_icon_desc" />
     <string name="email_icon_desc" />
+    <string name="ai_avatar" />
 </resources>

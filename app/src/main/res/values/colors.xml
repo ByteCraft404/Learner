@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bottom_nav_selected_indicator_color">#4285F4</color> <color name="bottom_nav_selected_text_icon_color">@android:color/white</color> <color name="bottom_nav_unselected_text_icon_color">#808080</color>
+    <color name="blue_atende">#1976D2</color>
+    <color name="bottom_nav_ripple_color_effect">#BBDEFB</color>
+
 </resources>

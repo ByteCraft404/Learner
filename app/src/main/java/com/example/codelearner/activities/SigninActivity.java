@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.codelearner.Models.LoginRequest;
-import com.example.codelearner.Models.Student;
+import com.example.codelearner.Models.LoginResponse;
 import com.example.codelearner.R;
 import com.example.codelearner.api.RetrofitClient;
 import com.example.codelearner.api.UserApi;
@@ -40,18 +40,15 @@ public class SigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set system bars to white with dark icons
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.WHITE);
-            window.setNavigationBarColor(Color.WHITE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                window.getDecorView().setSystemUiVisibility(
-                        android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR |
-                                android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                );
-            }
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // Set the status bar color to your desired color
+        // For API 21+ (Lollipop and above)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.start));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.start));
         }
 
         setContentView(R.layout.activity_signin);
@@ -82,36 +79,41 @@ public class SigninActivity extends AppCompatActivity {
 
             LoginRequest loginRequest = new LoginRequest(email, password);
             UserApi api = RetrofitClient.getRetrofitInstance().create(UserApi.class);
-            Call<Student> call = api.loginUser(loginRequest);
+            Call<LoginResponse> call = api.loginUser(loginRequest);
 
-            call.enqueue(new Callback<Student>() {
+            call.enqueue(new Callback<LoginResponse>() {
                 @Override
-                public void onResponse(Call<Student> call, Response<Student> response) {
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        Student student = response.body();
+                        LoginResponse loginResponse = response.body();
 
-                        // 🔍 Log full student object for debugging
-                        Log.d("FULL_LOGIN_RESPONSE", new Gson().toJson(student));
+                        Log.d("FULL_LOGIN_RESPONSE", new Gson().toJson(loginResponse));
 
-                        String studentName = student.getFullName();
+                        String studentName = loginResponse.getFullName();
                         if (studentName == null || studentName.isEmpty()) {
-                            studentName = student.getEmail(); // fallback
+                            studentName = loginResponse.getEmail();
                         }
+
+
+                        getSharedPreferences("user_prefs", MODE_PRIVATE)
+                                .edit()
+                                .putString("studentName", studentName)
+                                .apply();
 
                         Toast.makeText(SigninActivity.this, "Welcome " + studentName, Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(SigninActivity.this, LoginActivity.class);
-                        intent.putExtra("studentId", student.getId());
-                        intent.putExtra("studentName", studentName); // ✅ send full name
+                        Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                        intent.putExtra("studentId", loginResponse.getId());
                         startActivity(intent);
                         finish();
-                    } else {
+                    }
+                    else {
                         handleLoginError(response);
                     }
                 }
 
                 @Override
-                public void onFailure(Call<Student> call, Throwable t) {
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
                     Toast.makeText(SigninActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
                     Log.e("LOGIN_FAILURE", "Error: ", t);
                 }
@@ -133,15 +135,15 @@ public class SigninActivity extends AppCompatActivity {
     private void togglePasswordVisibility(EditText editText, ImageView toggleIcon) {
         if (editText.getTransformationMethod() instanceof PasswordTransformationMethod) {
             editText.setTransformationMethod(null);
-            toggleIcon.setImageResource(R.drawable.ic_eye_off); // Hide icon
+            toggleIcon.setImageResource(R.drawable.ic_eye_off);
         } else {
             editText.setTransformationMethod(new PasswordTransformationMethod());
-            toggleIcon.setImageResource(R.drawable.ic_eye); // Show icon
+            toggleIcon.setImageResource(R.drawable.ic_eye);
         }
         editText.setSelection(editText.getText().length());
     }
 
-    private void handleLoginError(Response<Student> response) {
+    private void handleLoginError(Response<LoginResponse> response) {
         String errorMessage = "Invalid email or password.";
         try {
             if (response.errorBody() != null) {

@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="110dp"
         android:text="Register"
         android:textColor="#1B5E20"
         android:textSize="32sp"
@@ -157,7 +157,7 @@
     <ImageView
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_lock"
+        android:src="@drawable/lock"
         app:layout_constraintStart_toStartOf="@+id/edit_text_password"
         app:layout_constraintTop_toTopOf="@+id/edit_text_password"
         app:layout_constraintBottom_toBottomOf="@+id/edit_text_password"
@@ -200,7 +200,7 @@
     <ImageView
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_lock"
+        android:src="@drawable/lock"
         app:layout_constraintStart_toStartOf="@+id/edit_text_confirm_password"
         app:layout_constraintTop_toTopOf="@+id/edit_text_confirm_password"
         app:layout_constraintBottom_toBottomOf="@+id/edit_text_confirm_password"
@@ -284,7 +284,7 @@
         android:text="Or continue with"
         android:textColor="#4CAF50"
         android:textSize="14sp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/remember_forgot_section" />
@@ -311,11 +311,11 @@
 
     <LinearLayout
         android:id="@+id/social_buttons_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_width="408dp"
+        android:layout_height="70dp"
         android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/or_continue_with">
@@ -323,47 +323,50 @@
         <androidx.cardview.widget.CardView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
+            android:layout_marginEnd="16dp"
             app:cardBackgroundColor="@android:color/white"
-            android:layout_marginEnd="16dp">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp">
+
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/facebook"
                 android:layout_gravity="center"
                 android:contentDescription="@string/facebook_login_desc"
+                android:src="@drawable/facebook"
                 app:tint="#4CAF50" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
+            android:layout_marginEnd="16dp"
             app:cardBackgroundColor="@android:color/white"
-            android:layout_marginEnd="16dp">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp">
+
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/google"
                 android:layout_gravity="center"
                 android:contentDescription="@string/google_login_desc"
+                android:src="@drawable/google"
                 app:tint="#4CAF50" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="60dp"
             android:layout_height="60dp"
+            app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardElevation="2dp">
+
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/apple"
                 android:layout_gravity="center"
                 android:contentDescription="@string/apple_login_desc"
+                android:src="@drawable/apple"
                 app:tint="#4CAF50" />
         </androidx.cardview.widget.CardView>
 

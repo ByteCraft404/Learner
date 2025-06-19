@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8F5E9"
+    tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/top_left_logo_card"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:cardCornerRadius="8dp" app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp">
+        <ImageView
+            android:id="@+id/top_left_ice_cream_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/studyicon"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"/> </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:id="@+id/top_left_menu_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="544dp"
+        android:layout_marginEnd="240dp"
+        android:alpha="0.8"
+        android:src="@drawable/hamburger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/circle_pink_shape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="-10dp"
+        android:alpha="0.6"/>
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/circle_pink_shape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="-10dp"
+        android:alpha="0.6"/>
+
+    <ImageView
+        android:id="@+id/center_ice_cream_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cloud"
+        android:scaleType="centerInside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        android:adjustViewBounds="true"
+        android:alpha="0.3"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/center_icon_card"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        app:cardCornerRadius="20dp" app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        android:translationX="-60dp"
+        android:translationY="-20dp">
+        <ImageView
+            android:id="@+id/center_ice_cream_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/studentss"
+            android:scaleType="centerCrop" /> </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/delicious_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Top Knowledge For You\n ALL THE WAY"
+        android:textColor="@color/blue_atende"
+        android:textSize="24sp"
+        android:fontFamily=""
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/center_icon_card" android:layout_marginTop="16dp"
+        app:layout_constraintHorizontal_bias="0.7"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/explore_button_card"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:cardCornerRadius="40dp"
+        app:cardBackgroundColor="@color/blue_atende"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/door"
+            android:layout_gravity="center"
+            app:tint="#E8F5E9" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/explore_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EXPLORE"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/explore_button_card"
+        app:layout_constraintStart_toStartOf="@id/explore_button_card"
+        app:layout_constraintEnd_toEndOf="@id/explore_button_card"
+        android:layout_marginTop="8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

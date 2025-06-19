@@ -3,80 +3,146 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8F5E9"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/background_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/boy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/main_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:gravity="start"
-        android:lineSpacingExtra="8dp"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:text="The best\napp for\nyour Study"
-        android:textColor="@android:color/white"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_middle"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/top_left_logo_card"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:cardCornerRadius="8dp" app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp">
+        <ImageView
+            android:id="@+id/top_left_ice_cream_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/circle_pink_shape"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"/> </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.Guideline
-    android:id="@+id/guideline_middle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    app:layout_constraintGuide_percent="0.72" />
 
-    <Button
-        android:id="@+id/sign_in_button"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#4CAF50"
-        android:text="Sign in"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:cornerRadius="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/create_account_button"
+    <ImageView
+        android:id="@+id/top_left_menu_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="516dp"
+        android:layout_marginEnd="296dp"
+        android:alpha="0.8"
+        android:src="@drawable/circle_pink_shape"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/create_account_button"
-        android:layout_width="207dp"
-        android:layout_height="52dp"
+    <View
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/circle_pink_shape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="-10dp"
+        android:alpha="0.6"/>
 
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="168dp"
-        android:backgroundTint="#66FFFFFF"
-        android:text="Create an account"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+    <View
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/circle_pink_shape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="-10dp"
+        android:alpha="0.6"/>
+
+    <ImageView
+        android:id="@+id/center_ice_cream_bg"
+        android:layout_width="457dp"
+        android:layout_height="885dp"
+        android:adjustViewBounds="true"
+        android:alpha="0.3"
+        android:scaleType="fitXY"
+        android:src="#E8F5E9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/center_icon_card"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        app:cardCornerRadius="20dp" app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        android:translationX="-60dp"
+        android:translationY="-20dp">
+
+        <ImageView
+            android:id="@+id/center_ice_cream_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/stud"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/delicious_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Top Knowledge For You\n                 ALL THE WAY"
+        android:textColor="#81C784"
+        android:textSize="24sp"
+        android:fontFamily=""
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/center_icon_card" android:layout_marginTop="16dp"
+        app:layout_constraintHorizontal_bias="0.7"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/explore_button_card"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:cardCornerRadius="40dp"
+        app:cardBackgroundColor="#000D47A1"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp">
+
+        <ImageView
+            android:layout_marginTop="6dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/door"
+            app:tint="#81C784" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/explore_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EXPLORE"
+        android:textColor="#81C784"
+        android:textSize="14sp"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/explore_button_card"
+        app:layout_constraintStart_toStartOf="@id/explore_button_card"
+        app:layout_constraintEnd_toEndOf="@id/explore_button_card"
+        android:layout_marginTop="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
