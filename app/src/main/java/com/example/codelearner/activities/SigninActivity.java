@@ -1,7 +1,7 @@
 package com.example.codelearner.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.SharedPreferences; // Import SharedPreferences
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -42,17 +41,15 @@ public class SigninActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_signin);
 
-        // Set white status bar and navigation bar with dark icons
+        // Set white status bar and nav bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.start));
             window.setNavigationBarColor(ContextCompat.getColor(this, R.color.start));
         }
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             View decor = getWindow().getDecorView();
@@ -100,23 +97,21 @@ public class SigninActivity extends AppCompatActivity {
                             studentName = loginResponse.getEmail();
                         }
 
-                        // --- FIX START: Store studentId and studentEmail in SharedPreferences ---
+                        // Store in SharedPreferences
                         SharedPreferences sharedPref = getSharedPreferences("user_prefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString("studentName", studentName);
-                        editor.putString("studentId", loginResponse.getId()); // Store the student ID
-                        editor.putString("studentEmail", loginResponse.getEmail()); // Store the student email
+                        editor.putString("studentId", loginResponse.getId());
+                        editor.putString("studentEmail", loginResponse.getEmail());
                         editor.apply();
-                        // --- FIX END ---
 
                         Toast.makeText(SigninActivity.this, "Welcome " + studentName, Toast.LENGTH_SHORT).show();
 
-                        // Removed putExtra("studentId", ...) as it's now in SharedPreferences
+                        // Go to MainActivity
                         Intent intent = new Intent(SigninActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
-                    }
-                    else {
+                    } else {
                         handleLoginError(response);
                     }
                 }
@@ -132,12 +127,13 @@ public class SigninActivity extends AppCompatActivity {
         // Toggle password visibility
         togglePasswordVisibility.setOnClickListener(v -> togglePasswordVisibility(etPassword, togglePasswordVisibility));
 
-        // Back button
+        // Back button logic
         backButtonContainer.setOnClickListener(v -> finish());
 
-        // Sign up link
+        // Navigate to RegisterActivity
         signUpLinkBottom.setOnClickListener(v -> {
-            startActivity(new Intent(SigninActivity.this, RegisterActivity.class));
+            Intent intent = new Intent(SigninActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
     }
 

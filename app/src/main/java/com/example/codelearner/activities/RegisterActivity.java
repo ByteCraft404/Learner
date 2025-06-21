@@ -55,10 +55,11 @@ public class RegisterActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.edit_text_email);
         etPassword = findViewById(R.id.edit_text_password);
         etConfirmPassword = findViewById(R.id.edit_text_confirm_password);
-        btnRegister = findViewById(R.id.login_button);
+        btnRegister = findViewById(R.id.register_button);
         togglePasswordVisibility = findViewById(R.id.toggle_password_visibility);
         toggleConfirmPasswordVisibility = findViewById(R.id.toggle_confirm_password_visibility);
-        signInLinkBottom = findViewById(R.id.sign_up_link_bottom); // Confirm this ID in XML
+        signInLinkBottom = findViewById(R.id.sign_in_link_bottom);
+
 
         btnRegister.setOnClickListener(v -> {
             String name = etFullName.getText().toString().trim();

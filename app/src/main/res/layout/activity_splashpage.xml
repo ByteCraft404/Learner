@@ -23,19 +23,16 @@
             android:id="@+id/top_left_ice_cream_logo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.8"
             android:scaleType="centerCrop"
             android:src="@drawable/circle_pink_shape" />
     </androidx.cardview.widget.CardView>
-
 
     <ImageView
         android:id="@+id/top_left_menu_icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="556dp"
-        android:layout_marginEnd="324dp"
-        android:alpha="0.8"
+        android:layout_marginTop="568dp"
+        android:layout_marginEnd="268dp"
         android:src="@drawable/circle_pink_shape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,35 +41,25 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="-10dp"
-        android:alpha="0.6"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/circle_pink_shape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="-10dp"
-        android:layout_marginTop="200dp"
-        android:alpha="0.6"
-        android:background="@drawable/circle_pink_shape"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/center_ice_cream_bg"
         android:layout_width="457dp"
         android:layout_height="885dp"
         android:adjustViewBounds="true"
-        android:alpha="0.3"
         android:scaleType="fitXY"
-        android:src="#E8F5E9"
+        android:src="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.4" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/center_icon_card"
@@ -95,7 +82,6 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/stud" />
-
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -114,7 +100,6 @@
             android:id="@+id/top_right_of_center_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.7"
             android:scaleType="centerCrop"
             android:src="@drawable/studentss" />
     </androidx.cardview.widget.CardView>
@@ -135,7 +120,6 @@
             android:id="@+id/bottom_right_of_center_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.7"
             android:scaleType="centerCrop"
             android:src="@drawable/student" />
     </androidx.cardview.widget.CardView>
@@ -145,11 +129,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:fontFamily=""
         android:gravity="center"
         android:lineSpacingExtra="4dp"
         android:text="Top Knowledge For You\n                 ALL THE WAY"
-        android:textColor="#81C784"
+        android:textColor="#4CAF50"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.582"
@@ -160,9 +143,9 @@
         android:id="@+id/explore_button_card"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="64dp"
-        android:layout_marginEnd="32dp"
-        app:cardBackgroundColor="#81C784"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="#4CAF50"
         app:cardCornerRadius="40dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -186,7 +169,7 @@
         android:letterSpacing="0.1"
         android:text="EXPLORE"
         android:textAllCaps="true"
-        android:textColor="#81C784"
+        android:textColor="#4CAF50"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@id/explore_button_card"
         app:layout_constraintStart_toStartOf="@id/explore_button_card"

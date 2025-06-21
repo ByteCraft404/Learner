@@ -15,11 +15,11 @@
         android:id="@+id/back_button_container"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
         app:cardCornerRadius="24dp"
+        app:cardBackgroundColor="#E8F5E9"
         app:cardElevation="0dp"
-        app:cardBackgroundColor="#4CAF50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -29,7 +29,8 @@
             android:layout_height="24dp"
             android:layout_gravity="center"
             android:src="@drawable/back"
-            android:contentDescription="@string/back_button_desc"/>
+            android:contentDescription="@string/back_button_desc"
+            app:tint="#4CAF50" />
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline
@@ -39,27 +40,25 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3" />
 
+
     <ImageView
         android:id="@+id/wave_shape"
-        android:layout_width="412dp"
+        android:layout_width="0dp"
         android:layout_height="82dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="152dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_wave_top"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_login_card_top"
-        app:layout_constraintDimensionRatio="H,0:0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_wave_start_top"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_login_card_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_end="498dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/login_card"
@@ -117,7 +116,8 @@
                     app:layout_constraintTop_toTopOf="@+id/welcome_back_title"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="-16dp"
-                    android:contentDescription="@string/leaf_icon_desc" />
+                    android:contentDescription="@string/leaf_icon_desc"
+                    app:tint="#4CAF50" />
 
                 <EditText
                     android:id="@+id/edit_text_email"
@@ -165,7 +165,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/lock"
+                    android:src="@drawable/ic_lock"
                     app:layout_constraintStart_toStartOf="@+id/edit_text_password"
                     app:layout_constraintTop_toTopOf="@+id/edit_text_password"
                     app:layout_constraintBottom_toBottomOf="@+id/edit_text_password"
