@@ -16,7 +16,7 @@ import com.example.codelearner.R;
 
 public class SplashMain extends AppCompatActivity {
 
-    private static final long SPLASH_DISPLAY_LENGTH = 2000;
+    private static final long SPLASH_DISPLAY_LENGTH = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

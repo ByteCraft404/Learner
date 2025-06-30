@@ -11,4 +11,5 @@
     <string name="checkmark_icon_desc" />
     <string name="email_icon_desc" />
     <string name="ai_avatar" />
+    <string name="wave_desc">\n</string>
 </resources>
