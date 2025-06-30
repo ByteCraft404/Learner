@@ -40,11 +40,10 @@
 
     <ImageView
         android:id="@+id/backButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="80dp"
-        android:background="@drawable/rounded_button_dashboard_inactive"
         android:src="@drawable/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -120,7 +119,7 @@
     <HorizontalScrollView
         android:id="@+id/horizontalScrollViewLearningCards"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,6 +127,7 @@
         android:scrollbars="none">
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/learningCardsLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
