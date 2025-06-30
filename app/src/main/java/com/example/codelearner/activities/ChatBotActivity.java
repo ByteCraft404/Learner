@@ -21,6 +21,8 @@ import com.example.codelearner.R;
 import com.example.codelearner.api.GeminiApiService;
 import com.example.codelearner.network.ApiClient;
 
+import java.net.SocketTimeoutException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,30 +80,37 @@ public class ChatBotActivity extends AppCompatActivity {
 
             inflateUserMessage(question);
             messageInput.setText("");
-
             ChatRequest chatRequest = new ChatRequest(question);
-            geminiApi.askGemini(chatRequest).enqueue(new Callback<ChatResponse>() {
-                @Override
-                public void onResponse(@NonNull Call<ChatResponse> call, @NonNull Response<ChatResponse> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        String formattedAnswer = formatListNicely(response.body().getAnswer());
-                        showAIMessage(formattedAnswer);
-                    } else {
-                        showAIMessage("Sorry, I couldn't understand that.");
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ChatResponse> call, Throwable t) {
-                    showAIMessage("Failed to connect. Try again.");
-                }
-            });
+            sendWithRetry(chatRequest, 2);
         });
 
         plusIcon.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, PICK_IMAGE_REQUEST);
+        });
+    }
+
+    private void sendWithRetry(ChatRequest request, int retriesLeft) {
+        geminiApi.askGemini(request).enqueue(new Callback<ChatResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ChatResponse> call, @NonNull Response<ChatResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    String formattedAnswer = formatListNicely(response.body().getAnswer());
+                    showAIMessage(formattedAnswer);
+                } else {
+                    showAIMessage("Sorry, I couldn't understand that.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ChatResponse> call, Throwable t) {
+                if (t instanceof SocketTimeoutException && retriesLeft > 0) {
+                    sendWithRetry(request, retriesLeft - 1);
+                } else {
+                    showAIMessage("Failed to connect. Try again.");
+                }
+            }
         });
     }
 
