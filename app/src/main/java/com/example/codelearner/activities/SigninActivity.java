@@ -2,7 +2,6 @@ package com.example.codelearner.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -15,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -33,10 +33,7 @@ import retrofit2.Response;
 public class SigninActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
-    private Button btnSignin;
     private ImageView togglePasswordVisibility;
-    private CardView backButtonContainer;
-    private TextView signUpLinkBottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,25 +41,21 @@ public class SigninActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
 
         // Set white status bar and nav bar
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.start));
-            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.start));
-        }
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.start));
+        window.setNavigationBarColor(ContextCompat.getColor(this, R.color.white));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            View decor = getWindow().getDecorView();
-            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-        }
+        View decor = getWindow().getDecorView();
+        decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
 
         // Initialize views
         etEmail = findViewById(R.id.edit_text_email);
         etPassword = findViewById(R.id.edit_text_password);
-        btnSignin = findViewById(R.id.login_button);
+        Button btnSignin = findViewById(R.id.login_button);
         togglePasswordVisibility = findViewById(R.id.toggle_password_visibility);
-        backButtonContainer = findViewById(R.id.back_button_container);
-        signUpLinkBottom = findViewById(R.id.sign_up_link_bottom);
+        CardView backButtonContainer = findViewById(R.id.back_button_container);
+        TextView signUpLinkBottom = findViewById(R.id.sign_up_link_bottom);
 
         // Prefill email if passed from RegisterActivity
         String passedEmail = getIntent().getStringExtra("email");
@@ -86,7 +79,7 @@ public class SigninActivity extends AppCompatActivity {
 
             call.enqueue(new Callback<LoginResponse>() {
                 @Override
-                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         LoginResponse loginResponse = response.body();
 
@@ -117,7 +110,7 @@ public class SigninActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                     Toast.makeText(SigninActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
                     Log.e("LOGIN_FAILURE", "Error: ", t);
                 }

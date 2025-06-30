@@ -6,11 +6,21 @@
     android:orientation="vertical"
     android:gravity="end">
 
+    <TextView
+        android:id="@+id/userImageLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You sent an image"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"/>
+
     <ImageView
         android:id="@+id/userImageView"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:background="@drawable/rounded_buttonbackground"
-        android:layout_marginTop="4dp"/>
+        android:contentDescription="User image message"/>
 </LinearLayout>

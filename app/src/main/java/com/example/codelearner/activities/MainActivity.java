@@ -24,7 +24,6 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private View mainContentRoot; // Reference to your main ConstraintLayout
     private ImageButton menuButton;
     private NavigationView navigationViewDrawer; // Reference to your navigation drawer
     TextView helloLisaTextView; // Keep this for your existing logic
@@ -52,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize DrawerLayout and main content view
         drawerLayout = findViewById(R.id.drawer_layout);
-        mainContentRoot = findViewById(R.id.main_content_root); // The ConstraintLayout to move (though it won't move now)
+        // Reference to your main ConstraintLayout
+        View mainContentRoot = findViewById(R.id.main_content_root); // The ConstraintLayout to move (though it won't move now)
         menuButton = findViewById(R.id.menuButton);
         navigationViewDrawer = findViewById(R.id.nav_view_drawer); // The NavigationView for the drawer
 

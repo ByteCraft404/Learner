@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="65dp"
         android:background="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,9 +20,8 @@
 
         <ImageView
             android:id="@+id/backButton"
-            android:layout_width="46dp"
-            android:layout_height="48dp"
-            android:background="@drawable/bg_circle_pattern"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:contentDescription="Back"
             android:layout_marginStart="12dp"
             android:padding="16dp"
@@ -75,12 +74,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="24dp">
-
-
-
-
-
-
         </LinearLayout>
     </ScrollView>
 
@@ -88,7 +81,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomInputBar"
         android:layout_width="0dp"
-        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/rounded_black_button_outline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +94,7 @@
             android:id="@+id/plusIcon"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="4dp"
             android:contentDescription="Add attachment"
             android:src="@drawable/ic_add"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,9 +105,9 @@
         <EditText
             android:id="@+id/messageInput"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/rounded_edittext_background"
             android:hint="Send message..."
             android:paddingStart="16dp"
@@ -119,22 +115,11 @@
             android:textColor="@color/black"
             android:textColorHint="#AAAAAA"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/plusIcon"
-            app:layout_constraintEnd_toStartOf="@id/micIcon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <ImageView
-            android:id="@+id/micIcon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="8dp"
-            android:contentDescription="Voice input"
-            android:src="@drawable/ic_mic"
-            app:layout_constraintEnd_toStartOf="@id/sendIcon"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:tint="#1E88E5" />
+            app:layout_constraintEnd_toStartOf="@+id/sendIcon"
+            app:layout_constraintStart_toEndOf="@id/plusIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <ImageView
             android:id="@+id/sendIcon"

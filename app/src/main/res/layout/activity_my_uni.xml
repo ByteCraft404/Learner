@@ -9,11 +9,10 @@
 
     <ImageView
         android:id="@+id/icon_grid"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/rounded_button_dashboard_inactive"
         android:src="@drawable/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -67,9 +66,9 @@
         app:layout_constraintTop_toBottomOf="@+id/text_my_courses_title">
 
         <LinearLayout
-            android:layout_marginTop="10dp"
+
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="160dp"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
@@ -369,7 +368,7 @@
         android:id="@+id/text_upcoming_deadlines_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:text="Upcoming Deadlines"
         android:textColor="@color/black"
         android:textSize="24sp"

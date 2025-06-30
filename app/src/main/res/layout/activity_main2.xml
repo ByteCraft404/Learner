@@ -152,6 +152,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/rounded_button_dashboard"
                         android:padding="10dp"
@@ -163,7 +164,7 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="6dp"
                         android:layout_weight="1"
                         android:background="@drawable/rounded_button_dashboard_inactive"
                         android:padding="10dp"
@@ -176,6 +177,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
                         android:background="@drawable/rounded_button_dashboard"
                         android:padding="10dp"
                         android:text="Welcome"
@@ -309,8 +311,8 @@
                     app:layout_constraintTop_toTopOf="@+id/viewEssentials" />
 
                 <GridLayout
-                    android:layout_width="386dp"
-                    android:layout_height="450dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
@@ -528,7 +530,8 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/generateLearningPathCard"
                         android:layout_width="0dp"
-                        android:layout_height="120dp"
+                        android:layout_height="100dp"
+                        android:layout_marginBottom="12dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
                         android:layout_margin="8dp"
@@ -588,7 +591,7 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view_drawer"
-        android:layout_width="280dp"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
@@ -596,7 +599,6 @@
         app:itemIconTint="@color/blue_atende"
         app:itemTextColor="@color/black"
         app:menu="@menu/nav_drawer_menu"
-        app:cardElevation="8dp"
         android:background="@color/light_grey_background" />
 
 
