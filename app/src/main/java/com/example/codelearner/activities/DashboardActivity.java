@@ -18,6 +18,7 @@ import com.example.codelearner.api.RetrofitClient;
 import com.example.codelearner.network.ApiClient;
 import com.example.codelearner.network.ApiService;
 import com.example.codelearner.adapters.TopicAdapter;
+import com.example.codelearner.utils.WindowInsetsHelper;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -35,6 +36,9 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        // Setup edge-to-edge display with proper window insets handling
+        WindowInsetsHelper.setupEdgeToEdge(this, android.R.id.content);
 
         learningPathRecycler = findViewById(R.id.learningPathRecycler);
         TextView planTitle = findViewById(R.id.planTitle);

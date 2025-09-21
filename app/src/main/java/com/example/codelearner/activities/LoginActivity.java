@@ -20,6 +20,7 @@ import com.example.codelearner.Models.LearningPath;
 import com.example.codelearner.R;
 import com.example.codelearner.network.ApiClient;
 import com.example.codelearner.network.ApiService;
+import com.example.codelearner.utils.WindowInsetsHelper;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.HashMap;
@@ -43,18 +44,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Set white status bar and navigation bar with dark icons
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.WHITE);
-            window.setNavigationBarColor(Color.WHITE);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            View decor = getWindow().getDecorView();
-            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-        }
+        // Setup edge-to-edge display with proper window insets handling
+        WindowInsetsHelper.setupEdgeToEdge(this, android.R.id.content);
 
         // Initialize views
         studentIdInput = findViewById(R.id.studentIdInput);

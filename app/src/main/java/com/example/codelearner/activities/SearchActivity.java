@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import com.example.codelearner.R;
+import com.example.codelearner.utils.WindowInsetsHelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,9 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        // Setup edge-to-edge display with proper window insets handling
+        WindowInsetsHelper.setupEdgeToEdge(this, android.R.id.content);
 
         searchInput = findViewById(R.id.searchInput);
         searchButton = findViewById(R.id.searchButton);

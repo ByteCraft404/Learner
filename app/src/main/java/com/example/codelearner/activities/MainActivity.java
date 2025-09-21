@@ -16,9 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.codelearner.R;
+import com.example.codelearner.utils.WindowInsetsHelper;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,18 +40,8 @@ public class MainActivity extends AppCompatActivity {
         // Set the content view to your updated layout
         setContentView(R.layout.activity_main2); // Assuming activity_main2 is your main dashboard layout
 
-        // Set white status bar and navigation bar with dark icons
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.mainactivity));
-            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.mainactivity));
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            View decor = getWindow().getDecorView();
-            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-        }
+        // Setup edge-to-edge display with proper window insets handling
+        WindowInsetsHelper.setupEdgeToEdgeWithDrawer(this, R.id.drawer_layout, R.id.main_content_root, R.id.nav_view_drawer);
 
         // Initialize DrawerLayout and main content view
         drawerLayout = findViewById(R.id.drawer_layout);

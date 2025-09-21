@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.codelearner.R;
+import com.example.codelearner.utils.WindowInsetsHelper;
 
 public class GenerateLearning extends AppCompatActivity {
 
@@ -22,18 +23,8 @@ public class GenerateLearning extends AppCompatActivity {
 
         setContentView(R.layout.activity_generate_learning);
 
-        // Set white status bar and navigation bar with dark icons
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.mainactivity));
-            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.mainactivity));
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            View decor = getWindow().getDecorView();
-            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-        }
+        // Setup edge-to-edge display with proper window insets handling
+        WindowInsetsHelper.setupEdgeToEdge(this, android.R.id.content);
 
         TextView greetingTextView = findViewById(R.id.greetingText);
 

@@ -19,6 +19,7 @@ import com.example.codelearner.R;
 import com.example.codelearner.api.RetrofitClient;
 import com.example.codelearner.api.UserApi;
 import com.example.codelearner.Models.Student;
+import com.example.codelearner.utils.WindowInsetsHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,21 +36,10 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_register);
 
-        // Set white status bar and navigation bar with dark icons
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.WHITE);
-            window.setNavigationBarColor(Color.WHITE);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            View decor = getWindow().getDecorView();
-            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-        }
+        // Setup edge-to-edge display with proper window insets handling
+        WindowInsetsHelper.setupEdgeToEdge(this, android.R.id.content);
 
         etFullName = findViewById(R.id.edit_text_full_name);
         etEmail = findViewById(R.id.edit_text_email);

@@ -24,6 +24,7 @@ import com.example.codelearner.Models.LoginResponse;
 import com.example.codelearner.R;
 import com.example.codelearner.api.RetrofitClient;
 import com.example.codelearner.api.UserApi;
+import com.example.codelearner.utils.WindowInsetsHelper;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -40,14 +41,8 @@ public class SigninActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        // Set white status bar and nav bar
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.start));
-        window.setNavigationBarColor(ContextCompat.getColor(this, R.color.white));
-
-        View decor = getWindow().getDecorView();
-        decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+        // Setup edge-to-edge display with proper window insets handling
+        WindowInsetsHelper.setupEdgeToEdge(this, android.R.id.content);
 
         // Initialize views
         etEmail = findViewById(R.id.edit_text_email);

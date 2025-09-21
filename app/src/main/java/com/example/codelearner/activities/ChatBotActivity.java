@@ -20,6 +20,7 @@ import com.example.codelearner.Models.ChatResponse;
 import com.example.codelearner.R;
 import com.example.codelearner.api.GeminiApiService;
 import com.example.codelearner.network.ApiClient;
+import com.example.codelearner.utils.WindowInsetsHelper;
 
 import java.net.SocketTimeoutException;
 
@@ -40,13 +41,8 @@ public class ChatBotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_bot);
 
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
-        window.setNavigationBarColor(ContextCompat.getColor(this, R.color.black));
-
-        View decor = getWindow().getDecorView();
-        decor.setSystemUiVisibility(0);
+        // Setup edge-to-edge display with proper window insets handling
+        WindowInsetsHelper.setupEdgeToEdge(this, android.R.id.content);
 
         String studentName = getSharedPreferences("user_prefs", MODE_PRIVATE).getString("studentName", "Student");
 

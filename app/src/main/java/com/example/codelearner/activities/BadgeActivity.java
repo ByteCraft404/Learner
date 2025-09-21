@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.codelearner.adapters.BadgeAdapter;
 import com.example.codelearner.Models.Badge;
+import com.example.codelearner.utils.WindowInsetsHelper;
 import java.util.ArrayList;
 import com.example.codelearner.R;
 import java.util.List;
@@ -20,6 +21,9 @@ public class BadgeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_badge);
+
+        // Setup edge-to-edge display with proper window insets handling
+        WindowInsetsHelper.setupEdgeToEdge(this, android.R.id.content);
 
         recyclerView = findViewById(R.id.badgeRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

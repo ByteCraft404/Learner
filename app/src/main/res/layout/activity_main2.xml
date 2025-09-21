@@ -13,7 +13,9 @@
         android:id="@+id/main_content_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F0F0F0">
+        android:background="#F0F0F0"
+        android:fitsSystemWindows="false"
+        android:clipToPadding="false">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/topBackgroundCard"
@@ -24,7 +26,8 @@
             android:backgroundTint="@android:color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
